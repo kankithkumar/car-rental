@@ -1,0 +1,155 @@
+/* styles/AdminCars.module.css */
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main {
+  flex: 1;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1200px; /* Adjust max width as needed for table */
+  margin: 2rem auto;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #00ccff;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.error {
+    color: #ff4081;
+    text-align: center;
+}
+
+.actions {
+    margin-bottom: 1.5rem;
+    text-align: right; /* Align add button to the right */
+}
+
+.addButton {
+    display: inline-block;
+    background-color: #28a745; /* Green for add button */
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.addButton:hover {
+    background-color: #218838;
+}
+
+
+.carList {
+    width: 100%; /* Ensure the table takes full width */
+    overflow-x: auto; /* Add horizontal scroll for smaller screens */
+}
+
+.carTable {
+    width: 100%;
+    border-collapse: collapse; /* Collapse borders */
+    margin-top: 1rem;
+    background-color: #2a2a2a; /* Dark background for the table */
+    color: #ffffff;
+}
+
+.carTable th,
+.carTable td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #444; /* Darker border */
+}
+
+.carTable th {
+    background-color: #333; /* Darker background for header */
+    font-weight: bold;
+    color: #00ccff; /* Bright color for header text */
+}
+
+.carTable tbody tr:hover {
+    background-color: #3a3a3a; /* Slightly lighter background on hover */
+}
+
+.carImage {
+    width: 80px; /* Adjust image size as needed */
+    height: auto;
+    border-radius: 4px;
+}
+
+.noImage {
+    width: 80px;
+    height: 60px;
+    background-color: #555;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #ccc;
+}
+
+
+.actionButton {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-right: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.actionButton:last-child {
+    margin-right: 0;
+}
+
+.actionButton {
+    background-color: #007bff; /* Blue for edit */
+    color: #fff;
+}
+
+.actionButton:hover {
+    background-color: #0056b3;
+}
+
+.deleteButton {
+    background-color: #dc3545; /* Red for delete */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.deleteButton:hover {
+    background-color: #c82333;
+}
+
+/* Add responsiveness */
+@media (max-width: 768px) {
+    .main {
+        padding: 1rem;
+    }
+    .title {
+        font-size: 2rem;
+    }
+    .carTable th,
+    .carTable td {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+    .carImage, .noImage {
+        width: 60px;
+        height: auto;
+    }
+    .actionButton {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+}

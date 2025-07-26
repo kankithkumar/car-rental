@@ -1,0 +1,59 @@
+/* styles/Home.module.css */
+/* ... (previous styles) ... */
+
+.carsSection {
+    margin-top: 4rem;
+    text-align: center;
+    width: 100%;
+}
+
+.carsSection h2 {
+    font-size: 2.5rem;
+    color: #00ccff; /* Matching title color */
+    margin-bottom: 2rem;
+}
+
+.carList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 2rem; /* Space between car cards */
+    padding: 0 2rem;
+}
+
+.carCard {
+    background-color: #2a2a2a; /* Slightly lighter dark background for cards */
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: left;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+.carCard h3 {
+    margin-top: 0;
+    color: #ff4081; /* Bright color for car titles */
+}
+
+.carCard a {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #00ccff; /* Bright color for links */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.carCard a:hover {
+    text-decoration: underline;
+}
+
+
+/* Add responsiveness if needed */
+@media (max-width: 600px) {
+  .title {
+    font-size: 3rem;
+  }
+
+  .description {
+    font-size: 1.2rem;
+  }
+}

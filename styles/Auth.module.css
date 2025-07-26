@@ -1,0 +1,131 @@
+/* styles/Auth.module.css */
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  width: 100%; /* Ensure main takes full width for centering */
+}
+
+.authCard {
+  background-color: #2a2a2a; /* Slightly lighter dark background */
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  width: 100%;
+  max-width: 400px; /* Limit max width of the card */
+  text-align: center; /* Center content inside the card */
+}
+
+.title {
+  font-size: 2rem;
+  color: #00ccff; /* Bright color for titles */
+  margin-bottom: 1.5rem;
+}
+
+.error {
+  color: #ff4081; /* Bright red for errors */
+  margin-bottom: 1rem;
+}
+
+.success {
+    color: #90ee90; /* Light green for success */
+    margin-bottom: 1rem;
+}
+
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+  text-align: left; /* Align labels and inputs to the left */
+}
+
+.formGroup label {
+  display: block; /* Make labels block elements for better spacing */
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #cccccc; /* Lighter color for labels */
+}
+
+.inputField {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #555; /* Darker border */
+  border-radius: 4px;
+  background-color: #333; /* Dark background for input */
+  color: #ffffff; /* Light text color */
+  font-size: 1rem;
+}
+
+.inputField:focus {
+    outline: none;
+    border-color: #00ccff; /* Highlight color on focus */
+    box-shadow: 0 0 0 0.2rem rgba(0, 204, 255, 0.25);
+}
+
+
+.submitButton {
+  background-color: #ff4081; /* Bright color for the button */
+  color: #ffffff;
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.submitButton:hover {
+  background-color: #e0005a; /* Darker shade on hover */
+}
+
+.switchAuth {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: #cccccc;
+}
+
+.switchAuth a {
+    color: #00ccff; /* Bright color for the link */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.switchAuth a:hover {
+    text-decoration: underline;
+}
+
+/* Add responsiveness if needed */
+@media (max-width: 480px) {
+    .authCard {
+        padding: 1.5rem;
+    }
+
+    .title {
+        font-size: 1.8rem;
+    }
+
+    .inputField {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+
+    .submitButton {
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+}

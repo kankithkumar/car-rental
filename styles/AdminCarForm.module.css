@@ -1,0 +1,135 @@
+/* styles/AdminCarForm.module.css */
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main {
+  flex: 1;
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px; /* Limit max width of the form container */
+  margin: 2rem auto; /* Center the content */
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #00ccff;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.backLink {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.backLink a {
+    color: #cccccc;
+    text-decoration: none;
+}
+
+.backLink a:hover {
+    text-decoration: underline;
+}
+
+
+.formContainer {
+    background-color: #2a2a2a; /* Dark background */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+}
+
+.error {
+  color: #ff4081;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.success {
+    color: #90ee90;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+
+.carForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #cccccc;
+}
+
+.inputField {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #333;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.inputField:focus {
+    outline: none;
+    border-color: #00ccff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 204, 255, 0.25);
+}
+
+
+.submitButton {
+  background-color: #28a745; /* Green for add button */
+  color: #ffffff;
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1.5rem;
+}
+
+.submitButton:hover {
+  background-color: #218838;
+}
+
+.submitButton:disabled {
+    background-color: #6c757d; /* Gray when disabled */
+    cursor: not-allowed;
+}
+
+
+/* Add responsiveness */
+@media (max-width: 768px) {
+    .main {
+        padding: 1rem;
+    }
+    .title {
+        font-size: 2rem;
+    }
+    .formContainer {
+        padding: 1.5rem;
+    }
+     .inputField {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+
+    .submitButton {
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,97 @@
+/* styles/CarDetails.module.css */
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main {
+  flex: 1;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1000px; /* Limit max width of the content */
+  margin: 2rem auto; /* Center the content */
+}
+
+.carDetailsContainer {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 2rem; /* Space between image gallery and info/booking */
+}
+
+.carImageGallery {
+  flex: 1; /* Take up available space */
+  min-width: 300px; /* Minimum width before wrapping */
+}
+
+.mainImage {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.placeholderImage {
+    width: 100%;
+    height: 300px; /* Placeholder height */
+    background-color: #333;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ccc;
+    font-size: 1.2rem;
+}
+
+
+.carInfoAndBooking {
+  flex: 1.5; /* Take up more space than the image gallery */
+  min-width: 300px; /* Minimum width before wrapping */
+  background-color: #2a2a2a; /* Slightly lighter dark background */
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+}
+
+.carInfo .title {
+  font-size: 2.5rem;
+  color: #00ccff; /* Bright color for car title */
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.carInfo p {
+  margin-bottom: 0.8rem;
+  color: #cccccc; /* Lighter text for details */
+}
+
+.carInfo .price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff4081; /* Bright color for price */
+  margin-top: 1.5rem;
+}
+
+.bookedMessage {
+    color: #ff4081; /* Bright red for booked message */
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+
+/* Add responsiveness */
+@media (max-width: 768px) {
+  .carDetailsContainer {
+    flex-direction: column;
+  }
+
+  .carImageGallery,
+  .carInfoAndBooking {
+    min-width: unset; /* Remove minimum width on smaller screens */
+    width: 100%;
+  }
+}

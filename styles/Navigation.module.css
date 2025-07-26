@@ -1,0 +1,78 @@
+/* styles/Navigation.module.css */
+.navigation {
+  background-color: #222; /* Slightly darker background for nav */
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff;
+}
+
+.logo a {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #00ccff; /* Bright color for the logo */
+  text-decoration: none;
+}
+
+.navList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.navList li {
+  margin-left: 2rem;
+}
+
+.navList a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.navList a:hover {
+  color: #00ccff; /* Highlight color on hover */
+}
+
+.logoutButton {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-left: 2rem;
+    transition: color 0.3s ease;
+}
+
+.logoutButton:hover {
+    color: #ff4081; /* Highlight color on hover */
+}
+
+
+/* Add responsiveness if needed */
+@media (max-width: 768px) {
+  .navigation {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .navList {
+    margin-top: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navList li {
+    margin: 0.5rem 0;
+  }
+
+  .logoutButton {
+      margin-left: 0;
+      margin-top: 0.5rem;
+  }
+}

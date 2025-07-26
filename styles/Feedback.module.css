@@ -1,0 +1,185 @@
+/* styles/Feedback.module.css */
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main {
+  flex: 1;
+  padding: 2rem;
+  width: 100%;
+  max-width: 800px; /* Limit max width */
+  margin: 2rem auto; /* Center content */
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #00ccff;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.feedbackContent {
+    display: flex;
+    flex-direction: column; /* Stack sections on smaller screens */
+    gap: 2rem; /* Space between sections */
+}
+
+.feedbackFormContainer,
+.feedbackListContainer {
+    background-color: #2a2a2a; /* Dark background */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+}
+
+.feedbackFormContainer h2,
+.feedbackListContainer h2 {
+    font-size: 1.8rem;
+    color: #ff4081; /* Bright color */
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.loginMessage {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #cccccc;
+}
+
+.loginMessage a {
+    color: #00ccff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.loginMessage a:hover {
+    text-decoration: underline;
+}
+
+
+.feedbackForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup {
+    margin-bottom: 1rem;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #cccccc;
+}
+
+.inputField {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #333;
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.inputField:focus {
+    outline: none;
+    border-color: #00ccff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 204, 255, 0.25);
+}
+
+.submitButton {
+    background-color: #ff4081;
+    color: #ffffff;
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1.5rem;
+}
+
+.submitButton:hover {
+    background-color: #e0005a;
+}
+
+.error {
+  color: #ff4081;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.success {
+    color: #90ee90;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+
+.feedbackList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.feedbackItem {
+    background-color: #333; /* Slightly darker background for items */
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #cccccc; /* Lighter text */
+}
+
+.feedbackComment {
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+    color: #ffffff;
+}
+
+.feedbackDate {
+    font-size: 0.9rem;
+    color: #aaaaaa;
+    text-align: right;
+}
+
+
+/* Add responsiveness */
+@media (max-width: 768px) {
+    .main {
+        padding: 1rem;
+    }
+    .title {
+        font-size: 2rem;
+    }
+    .feedbackFormContainer,
+    .feedbackListContainer {
+        padding: 1.5rem;
+    }
+     .feedbackFormContainer h2,
+    .feedbackListContainer h2 {
+        font-size: 1.5rem;
+    }
+    .feedbackItem {
+        padding: 1rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .feedbackContent {
+        flex-direction: row; /* Side-by-side on larger screens */
+    }
+    .feedbackFormContainer {
+        flex: 1; /* Distribute space */
+    }
+     .feedbackListContainer {
+        flex: 2; /* Give more space to the feedback list */
+    }
+}

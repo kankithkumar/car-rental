@@ -1,0 +1,102 @@
+/* styles/Dashboard.module.css */
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main {
+  flex: 1;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1000px; /* Limit max width */
+  margin: 2rem auto; /* Center content */
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #00ccff; /* Bright color */
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.bookingsSection {
+    margin-top: 2rem;
+    background-color: #2a2a2a; /* Dark background */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.bookingsSection h2 {
+    font-size: 2rem;
+    color: #ff4081; /* Bright color */
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.bookingList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.bookingItem {
+    background-color: #333; /* Slightly darker background for items */
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #cccccc; /* Lighter text */
+}
+
+.bookingDetails p {
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.bookingDetails p strong {
+    color: #ffffff; /* White color for strong text */
+}
+
+.bookingStatus {
+    font-weight: bold;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    text-transform: capitalize; /* Capitalize the first letter */
+}
+
+.bookingStatus.waiting {
+    background-color: #ffc107; /* Yellow for waiting */
+    color: #000;
+}
+
+.bookingStatus.approve {
+    background-color: #28a745; /* Green for approved */
+    color: #fff;
+}
+
+.bookingStatus.returned {
+    background-color: #6c757d; /* Gray for returned */
+    color: #fff;
+}
+
+.error {
+    color: #ff4081; /* Bright red for errors */
+    text-align: center;
+}
+
+/* Add responsiveness */
+@media (max-width: 768px) {
+   .title {
+       font-size: 2rem;
+   }
+   .bookingsSection h2 {
+       font-size: 1.8rem;
+   }
+   .bookingItem {
+       padding: 1rem;
+   }
+}
