@@ -32,8 +32,9 @@ export default async function handler(req, res) {
       }
 
       // Passwords match, login successful
-      // In a real application, you would generate and return a JWT token here
-      // For simplicity, we'll return a success message and some user info (excluding password)
+      // Set an HTTP-only cookie with the user ID
+      res.setHeader('Set-Cookie', `auth_token=${user._id.toString()}; HttpOnly; Path=/; Secure; SameSite=Strict`); // Use a proper token in a real app
+
       const userWithoutPassword = {
           _id: user._id,
           email: user.email,

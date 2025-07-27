@@ -1,59 +1,163 @@
 /* styles/Home.module.css */
-/* ... (previous styles) ... */
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* Background color from the reference image */
+  background-color: #f2f5f8;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.landingContent {
+    text-align: center;
+    max-width: 700px; /* Limit the width of the content */
+    margin-top: -80px; /* Adjust vertical positioning */
+}
+
+.presentService {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.landingTitle {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #333;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.landingDescription {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.emailSection {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Space between input and button */
+    margin-bottom: 1.5rem;
+}
+
+.emailInput {
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 60%; /* Adjust input width */
+    max-width: 300px;
+}
+
+.emailInput::placeholder {
+    color: #999;
+}
+
+.submitButton {
+    padding: 12px 30px;
+    background-color: #ff6b6b; /* Reddish-orange color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+    background-color: #e05a5a; /* Darker shade on hover */
+}
+
+.trustedBy {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+/* Remove or comment out unused styles from the previous design */
+/*
+.hero {
+  ...
+}
+
+.title {
+  ...
+}
+
+.description {
+  ...
+}
+
+.ctaButton {
+  ...
+}
 
 .carsSection {
-    margin-top: 4rem;
-    text-align: center;
-    width: 100%;
+  ...
 }
 
 .carsSection h2 {
-    font-size: 2.5rem;
-    color: #00ccff; /* Matching title color */
-    margin-bottom: 2rem;
+  ...
 }
 
 .carList {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-    gap: 2rem; /* Space between car cards */
-    padding: 0 2rem;
+  ...
 }
 
 .carCard {
-    background-color: #2a2a2a; /* Slightly lighter dark background for cards */
-    padding: 1.5rem;
-    border-radius: 8px;
-    text-align: left;
-    color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  ...
 }
 
 .carCard h3 {
-    margin-top: 0;
-    color: #ff4081; /* Bright color for car titles */
+  ...
 }
 
 .carCard a {
-    display: inline-block;
-    margin-top: 1rem;
-    color: #00ccff; /* Bright color for links */
-    text-decoration: none;
-    font-weight: bold;
+  ...
 }
 
-.carCard a:hover {
-    text-decoration: underline;
+.footer {
+  ...
 }
 
+.logo {
+  ...
+}
+*/
 
-/* Add responsiveness if needed */
+
+/* Add responsiveness */
 @media (max-width: 600px) {
-  .title {
-    font-size: 3rem;
-  }
+    .landingTitle {
+        font-size: 2.5rem;
+    }
 
-  .description {
-    font-size: 1.2rem;
-  }
+    .landingDescription {
+        font-size: 1rem;
+    }
+
+    .emailSection {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .emailInput {
+        width: 80%;
+        margin-bottom: 10px;
+    }
+
+    .submitButton {
+        width: 80%;
+        padding: 12px 20px;
+    }
 }

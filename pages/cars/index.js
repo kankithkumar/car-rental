@@ -1,7 +1,8 @@
 // pages/cars/index.js
 import Head from 'next/head';
-import styles from '../../styles/Cars.module.css'; // We'll create this CSS module next
-import CarCard from '../../components/CarCard'; // Import the CarCard component
+import styles from '../../styles/Cars.module.css';
+import CarCard from '../../components/CarCard';
+import Navigation from '../../components/Navigation'; // Import the Navigation component
 
 export default function Cars({ cars }) {
   return (
@@ -12,13 +13,15 @@ export default function Cars({ cars }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Navigation /> {/* Include the Navigation component */}
+
       <main className={styles.main}>
         <h1 className={styles.title}>All Available Cars</h1>
 
         <div className={styles.carList}>
           {cars.length > 0 ? (
             cars.map((car) => (
-              <CarCard key={car._id} car={car} /> // Use the CarCard component
+              <CarCard key={car._id} car={car} />
             ))
           ) : (
             <p>No cars available at the moment.</p>
@@ -31,10 +34,13 @@ export default function Cars({ cars }) {
   );
 }
 
-// Fetch all car data on each request
-export async function getServerSideProps() {
+export async function getServerSideProps({ req }) {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cars`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cars`, {
+      headers: {
+        Cookie: req.headers.cookie, // Include cookies from the incoming request
+      },
+    });
      if (!res.ok) {
         throw new Error(`Failed to fetch cars: ${res.status}`);
     }

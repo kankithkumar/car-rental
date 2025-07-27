@@ -1,18 +1,17 @@
 // components/Navigation.js
 import Link from 'next/link';
-import styles from '../styles/Navigation.module.css'; // We'll create this CSS module next
-import { useState, useEffect } from 'react'; // To handle login state and potentially user info
+import styles from '../styles/Navigation.module.css';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router'; // Import useRouter
 
 const Navigation = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
-    const [userId, setUserId] = useState(null); // To store user ID if needed for dashboard link
+    const [userId, setUserId] = useState(null);
+    const router = useRouter(); // Initialize useRouter
 
-    // In a real application, you would check for a valid JWT or session cookie here
-    // For this example, we'll simulate login state.
     useEffect(() => {
-        // Simulate checking for login status (replace with actual authentication check)
-        const user = JSON.parse(localStorage.getItem('user')); // Example: Check local storage
+        const user = JSON.parse(localStorage.getItem('user'));
         if (user && user._id) {
             setIsLoggedIn(true);
             setIsAdmin(user.is_admin);
@@ -22,18 +21,18 @@ const Navigation = () => {
             setIsAdmin(false);
             setUserId(null);
         }
-    }, []); // Run this effect only once on component mount
+    }, []);
 
     const handleLogout = () => {
-        // Simulate logout (replace with actual logout logic)
-        localStorage.removeItem('user'); // Example: Remove from local storage
+        localStorage.removeItem('user');
         setIsLoggedIn(false);
         setIsAdmin(false);
         setUserId(null);
-        // Redirect to home page or login page after logout
-        window.location.href = '/'; // Simple redirect for demonstration
+        router.push('/auth/login'); // Redirect to login page
     };
 
+    // Check if the current path is /cars
+    const isCarsPage = router.pathname === '/cars';
 
     return (
         <nav className={styles.navigation}>
@@ -53,23 +52,26 @@ const Navigation = () => {
                         Cars
                     </Link>
                 </li>
-                <li>
+                 <li>
                      <Link href="/feedback">
                         Feedback
                      </Link>
                 </li>
                 {isLoggedIn ? (
                     <>
-                        <li>
-                            <Link href={isAdmin ? "/admin/dashboard" : "/dashboard"}>
-                                Dashboard
-                            </Link>
-                        </li>
-                        <li>
-                            <button onClick={handleLogout} className={styles.logoutButton}>
-                                Logout
-                            </button>
-                        </li>
+                        {/* Removed Dashboard link */}
+                        {isCarsPage && ( // Conditionally render Logout only on the cars page
+                             <li>
+                                <button onClick={handleLogout} className={styles.logoutButton}>
+                                    Logout
+                                </button>
+                            </li>
+                        )}
+                         {!isCarsPage && (
+                            <li>
+                                 {/* You can add other navigation items here that should appear when logged in but not on the cars page */}
+                            </li>
+                         )}
                     </>
                 ) : (
                     <>

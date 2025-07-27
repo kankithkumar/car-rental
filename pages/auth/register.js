@@ -4,8 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styles from '../../styles/Auth.module.css';
 import Navigation from '../../components/Navigation';
-import Link from 'next/link'; // Import the Link component
-
+import Link from 'next/link';
 
 export default function Register() {
   const [name, setName] = useState('');
@@ -20,8 +19,8 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Clear previous errors
-    setSuccess(''); // Clear previous success messages
+    setError('');
+    setSuccess('');
 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/register`, {
@@ -35,12 +34,8 @@ export default function Register() {
       const data = await res.json();
 
       if (res.ok) {
-        // Registration successful
         setSuccess('Registration successful! You can now log in.');
-        // Optionally redirect to login after a delay
-        // setTimeout(() => router.push('/auth/login'), 2000);
       } else {
-        // Registration failed
         setError(data.message || 'Registration failed. Please try again.');
       }
     } catch (error) {
@@ -57,10 +52,15 @@ export default function Register() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navigation /> {/* Include the Navigation component */}
+      <Navigation />
 
       <main className={styles.main}>
          <div className={styles.authCard}>
+            <div className={styles.tabs}>
+                <Link href="/auth/login"><button className={styles.tabButton}>Log In</button></Link>
+                <button className={`${styles.tabButton} ${styles.active}`}>Register</button>
+            </div>
+
             <h1 className={styles.title}>Register</h1>
             {error && <p className={styles.error}>{error}</p>}
             {success && <p className={styles.success}>{success}</p>}
@@ -73,7 +73,7 @@ export default function Register() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  className={styles.inputField}
+                   className={styles.inputField}
                 />
               </div>
                <div className={styles.formGroup}>
@@ -121,9 +121,6 @@ export default function Register() {
               </div>
               <button type="submit" className={styles.submitButton}>Register</button>
             </form>
-             <p className={styles.switchAuth}>
-                Already have an account? <Link href="/auth/login">Login here</Link> {/* Link component is now defined */}
-             </p>
          </div>
       </main>
     </div>

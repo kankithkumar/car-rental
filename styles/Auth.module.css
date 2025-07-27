@@ -1,106 +1,126 @@
 /* styles/Auth.module.css */
+
 .container {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: column; /* Arrange children in a column */
+  /* Beautiful background */
+  background: linear-gradient(to top right, #6a85b6 0%, #bac8e0 100%);
 }
 
 .main {
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  width: 100%; /* Ensure main takes full width for centering */
+  flex-grow: 1; /* Allow main content to take up remaining space */
 }
 
 .authCard {
-  background-color: #2a2a2a; /* Slightly lighter dark background */
+  background-color: #f8f9fa; /* Light grey background for the card */
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  color: #333;
   width: 100%;
-  max-width: 400px; /* Limit max width of the card */
-  text-align: center; /* Center content inside the card */
+  max-width: 450px; /* Slightly increased max-width */
+  text-align: center;
 }
 
-.title {
-  font-size: 2rem;
-  color: #00ccff; /* Bright color for titles */
-  margin-bottom: 1.5rem;
-}
-
-.error {
-  color: #ff4081; /* Bright red for errors */
-  margin-bottom: 1rem;
-}
-
-.success {
-    color: #90ee90; /* Light green for success */
-    margin-bottom: 1rem;
-}
-
-
-.authForm {
+.tabs {
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+  background-color: #eee; /* Light grey background for tabs */
+  border-radius: 30px;
+  padding: 5px;
 }
+
+.tabButton {
+  flex-grow: 1;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  background: transparent;
+  color: #555;
+}
+
+.tabButton.active {
+  background: linear-gradient(to right, #ff6b6b, #ffa800); /* Gradient from the reference image */
+  color: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Removed socialIcons style */
 
 .formGroup {
-  margin-bottom: 1rem;
-  text-align: left; /* Align labels and inputs to the left */
+  margin-bottom: 1.5rem;
+  text-align: left;
 }
 
 .formGroup label {
-  display: block; /* Make labels block elements for better spacing */
+  display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
-  color: #cccccc; /* Lighter color for labels */
+  color: #555; /* Darker color for labels */
 }
 
 .inputField {
   width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #555; /* Darker border */
-  border-radius: 4px;
-  background-color: #333; /* Dark background for input */
-  color: #ffffff; /* Light text color */
+  padding: 0.5rem 0;
+  border: none;
+  border-bottom: 1px solid #ccc; /* Underlined input */
+  background-color: transparent;
+  color: #333;
   font-size: 1rem;
+  transition: border-bottom-color 0.3s ease;
 }
 
 .inputField:focus {
-    outline: none;
-    border-color: #00ccff; /* Highlight color on focus */
-    box-shadow: 0 0 0 0.2rem rgba(0, 204, 255, 0.25);
+  outline: none;
+  border-bottom-color: #ff6b6b; /* Highlight color on focus */
 }
 
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.checkboxGroup input[type="checkbox"] {
+  margin-right: 5px;
+}
 
 .submitButton {
-  background-color: #ff4081; /* Bright color for the button */
-  color: #ffffff;
-  padding: 1rem;
+  background: linear-gradient(to right, #ff6b6b, #ffa800); /* Gradient from the reference image */
+  color: #fff;
+  padding: 12px 20px;
   border: none;
-  border-radius: 5px;
-  font-size: 1.2rem;
+  border-radius: 25px;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .submitButton:hover {
-  background-color: #e0005a; /* Darker shade on hover */
+  opacity: 0.9;
 }
 
 .switchAuth {
     margin-top: 1.5rem;
-    font-size: 1rem;
-    color: #cccccc;
+    font-size: 0.9rem;
+    color: #555;
 }
 
 .switchAuth a {
-    color: #00ccff; /* Bright color for the link */
+    color: #ff6b6b; /* Color for the link */
     text-decoration: none;
     font-weight: bold;
 }
@@ -109,23 +129,58 @@
     text-decoration: underline;
 }
 
-/* Add responsiveness if needed */
+.error {
+  color: #ff4081; /* Bright red for errors */
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.success {
+    color: #90ee90; /* Light green for success */
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+/* Add responsiveness */
 @media (max-width: 480px) {
     .authCard {
         padding: 1.5rem;
     }
 
-    .title {
-        font-size: 1.8rem;
+    .tabs {
+        padding: 3px;
     }
 
-    .inputField {
-        padding: 0.6rem;
+    .tabButton {
+        padding: 8px 15px;
         font-size: 0.9rem;
     }
 
+    .socialIcon {
+        width: 35px;
+        height: 35px;
+        margin: 0 8px;
+    }
+
+    .socialIcon img {
+        width: 18px;
+        height: 18px;
+    }
+
+    .formGroup {
+        margin-bottom: 1rem;
+    }
+
+    .inputField {
+        font-size: 0.9rem;
+    }
+
+    .checkboxGroup {
+        font-size: 0.8rem;
+    }
+
     .submitButton {
-        padding: 0.8rem;
+        padding: 10px 15px;
         font-size: 1rem;
     }
 }
