@@ -1,0 +1,6 @@
+@echo off
+echo Stopping any existing Next.js processes...
+taskkill /f /im node.exe 2>nul
+timeout /t 2 /nobreak >nul
+echo Starting development server on port 3001...
+npm run dev

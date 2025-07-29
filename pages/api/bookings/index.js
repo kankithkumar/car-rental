@@ -16,8 +16,8 @@ export default async function handler(req, res) {
       const db = client.db('car_rental_db'); // Replace with your database name
 
       // Verify if the user and car exist
-      const user = await db.collection('users').findOne({ _id: ObjectId(userId) });
-      const car = await db.collection('cars').findOne({ _id: ObjectId(carId) });
+      const user = await db.collection('users').findOne({ _id: new ObjectId(userId) });      
+      const car = await db.collection('cars').findOne({ _id: new ObjectId(carId) });
 
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
@@ -27,9 +27,20 @@ export default async function handler(req, res) {
         return res.status(404).json({ message: 'Car not found' });
       }
 
-      // Check if the car is available (optional, depending on your frontend logic)
-      if (!car.availability_status) {
-         return res.status(400).json({ message: 'Car is not available' });
+      // Check for date conflicts with existing bookings
+      const bookingStart = new Date(bookDate);
+      const bookingEnd = new Date(returnDate);
+      
+      const conflictingBooking = await db.collection('bookings').findOne({
+        car_id: new ObjectId(carId),
+        book_status: { $in: ['waiting', 'approved'] },
+        $or: [
+          { book_date: { $lte: bookingEnd }, return_date: { $gte: bookingStart } }
+        ]
+      });
+      
+      if (conflictingBooking) {
+        return res.status(400).json({ message: 'Car is not available for the selected dates' });
       }
 
 
@@ -38,8 +49,8 @@ export default async function handler(req, res) {
 
       // Create the new booking document
       const newBooking = {
-        user_id: ObjectId(userId),
-        car_id: ObjectId(carId),
+        user_id: new ObjectId(userId),
+        car_id: new ObjectId(carId),
         book_place: bookPlace,
         book_date: new Date(bookDate), // Store as Date object
         duration: duration,
@@ -51,14 +62,10 @@ export default async function handler(req, res) {
 
       const result = await db.collection('bookings').insertOne(newBooking);
 
-      // Update car availability status to false
-      await db.collection('cars').updateOne(
-        { _id: ObjectId(carId) },
-        { $set: { availability_status: false } }
-      );
 
 
-      res.status(201).json({ message: 'Booking created successfully', bookingId: result.insertedId });
+
+      res.status(201).json({ message: 'Booking created successfully', bookingId: result.insertedId, bookingPrice: totalPrice });
 
     } catch (error) {
       console.error(error);

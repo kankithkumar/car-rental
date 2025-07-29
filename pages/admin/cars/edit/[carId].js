@@ -44,7 +44,7 @@ export default function EditCar() {
       if (!carId) return;
 
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cars/${carId}`);
+        const res = await fetch(`/api/admin/cars/${carId}`);
         if (!res.ok) {
            if (res.status === 404) {
                 setError('Car not found.');
@@ -133,7 +133,7 @@ export default function EditCar() {
 
     try {
         // Send the request to the same dynamic API route, but with PUT method
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/cars/${carId}`, {
+      const res = await fetch(`/api/admin/cars/${carId}`, {
         method: 'PUT',
         // Content-Type header is not needed with FormData
         // headers: {
@@ -146,9 +146,6 @@ export default function EditCar() {
 
       if (res.ok) {
         setSuccess('Car updated successfully!');
-        // Optionally refetch car data to show updated info
-         fetchCarData(); // Refetch car data after successful update
-
       } else {
         setError(data.message || 'Failed to update car. Please try again.');
       }

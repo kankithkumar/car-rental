@@ -1,10 +1,36 @@
 // pages/cars/index.js
 import Head from 'next/head';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import styles from '../../styles/Cars.module.css';
 import CarCard from '../../components/CarCard';
 import Navigation from '../../components/Navigation'; // Import the Navigation component
 
 export default function Cars({ cars }) {
+  const [user, setUser] = useState(null);
+  const [bookings, setBookings] = useState([]);
+  const [showDashboard, setShowDashboard] = useState(false);
+
+  useEffect(() => {
+    const loggedInUser = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : null;
+    if (loggedInUser && !loggedInUser.is_admin) {
+      setUser(loggedInUser);
+      fetchUserBookings(loggedInUser._id);
+    }
+  }, []);
+
+  const fetchUserBookings = async (userId) => {
+    try {
+      const res = await fetch(`/api/users/${userId}/bookings`);
+      if (res.ok) {
+        const data = await res.json();
+        setBookings(data.bookings || []);
+      }
+    } catch (error) {
+      console.error('Error fetching bookings:', error);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -16,7 +42,40 @@ export default function Cars({ cars }) {
       <Navigation /> {/* Include the Navigation component */}
 
       <main className={styles.main}>
-        <h1 className={styles.title}>All Available Cars</h1>
+        <div className={styles.header}>
+          <h1 className={styles.title}>All Available Cars</h1>
+          {user && (
+            <div className={styles.dashboardSection}>
+              <button 
+                onClick={() => setShowDashboard(!showDashboard)}
+                className={styles.dashboardToggle}
+              >
+                My Bookings ({bookings.length})
+              </button>
+            </div>
+          )}
+        </div>
+
+        {user && showDashboard && (
+          <div className={styles.quickDashboard}>
+            <h3>Recent Bookings</h3>
+            {bookings.length > 0 ? (
+              <div className={styles.bookingsList}>
+                {bookings.slice(0, 3).map((booking) => (
+                  <div key={booking._id} className={styles.bookingItem}>
+                    <span>Booking #{booking._id.slice(-6)}</span>
+                    <span className={`${styles.status} ${styles[booking.book_status]}`}>
+                      {booking.book_status}
+                    </span>
+                    <span>${booking.price}</span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p>No bookings yet</p>
+            )}
+          </div>
+        )}
 
         <div className={styles.carList}>
           {cars.length > 0 ? (

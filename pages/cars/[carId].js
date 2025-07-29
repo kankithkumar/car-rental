@@ -1,35 +1,29 @@
-// pages/cars/[carId].js
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import styles from '../../styles/CarDetails.module.css'; // We'll create this CSS module next
-import Navigation from '../../components/Navigation'; // Import Navigation component
-import BookingForm from '../../components/BookingForm'; // We'll create this component next
+import styles from '../../styles/CarDetails.module.css';
+import AppNavigation from '../../components/AppNavigation';
+import BookingForm from '../../components/BookingForm';
+import clientPromise from '../../utils/mongodb'; // MongoDB connection utility
+import { ObjectId } from 'mongodb';
 
 export default function CarDetails({ car }) {
   const router = useRouter();
-  // If car data wasn't available at build time (e.g., using fallback: true in getStaticPaths)
-  // if (router.isFallback) {
-  //   return <div>Loading car details...</div>;
-  // }
 
   if (!car) {
-      // Handle the case where car data is not found
-      return (
-          <div className={styles.container}>
-               <Head>
-                <title>Car Not Found - Car Rental App</title>
-                <meta name="description" content="Car details not available" />
-                <link rel="icon" href="/favicon.ico" />
-              </Head>
-              <Navigation />
-              <main className={styles.main}>
-                  <p>Car not found.</p>
-              </main>
-          </div>
-      );
+    return (
+      <div className={styles.container}>
+        <Head>
+          <title>Car Not Found - Car Rental App</title>
+          <meta name="description" content="Car details not available" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <AppNavigation />
+        <main className={styles.main}>
+          <p>Car not found.</p>
+        </main>
+      </div>
+    );
   }
-
 
   return (
     <div className={styles.container}>
@@ -39,18 +33,16 @@ export default function CarDetails({ car }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navigation /> {/* Include the Navigation component */}
+      <AppNavigation />
 
       <main className={styles.main}>
         <div className={styles.carDetailsContainer}>
           <div className={styles.carImageGallery}>
-            {/* Display car images here */}
             {car.image_url ? (
-                <img src={car.image_url} alt={`${car.make} ${car.model}`} className={styles.mainImage} />
+              <img src={car.image_url} alt={`${car.make} ${car.model}`} className={styles.mainImage} />
             ) : (
-                <div className={styles.placeholderImage}>No Image Available</div>
+              <div className={styles.placeholderImage}>No Image Available</div>
             )}
-            {/* Add more images if available */}
           </div>
 
           <div className={styles.carInfoAndBooking}>
@@ -61,66 +53,42 @@ export default function CarDetails({ car }) {
               <p><strong>Registration Number:</strong> {car.registration_number}</p>
               <p><strong>Availability:</strong> {car.availability_status ? 'Available' : 'Booked'}</p>
               <p className={styles.price}><strong>Price per day:</strong> ${car.price_per_day}</p>
-
-              {/* Add more car details as needed */}
             </div>
 
-            {/* Booking Form */}
-            {car.availability_status ? (
-                 <BookingForm carId={car._id} /> // Pass carId to the BookingForm component
-            ) : (
-                 <p className={styles.bookedMessage}>This car is currently booked.</p>
-            )}
-
+            <BookingForm carId={car._id} />
           </div>
         </div>
       </main>
-
-      {/* Optional Footer */}
     </div>
   );
 }
-
-// Fetch car data for a specific ID
 export async function getServerSideProps(context) {
-  const { carId } = context.params; // Get carId from the dynamic route parameter
+  const { carId } = context.params;
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cars/${carId}`);
-    if (!res.ok) {
-        // If the response status is 404, return notFound: true
-         if(res.status === 404) {
-            return { notFound: true };
-         }
-        throw new Error(`Failed to fetch car details: ${res.status}`);
+    const client = await clientPromise;
+    const db = client.db('car_rental_db');
+
+    const car = await db.collection('cars').findOne({ _id: new ObjectId(carId) });
+
+    if (!car) {
+      return { notFound: true };
     }
-    const data = await res.json();
+
+    // Convert ObjectId to string for React props
+    car._id = car._id.toString();
 
     return {
       props: {
-        car: data.car,
+        car,
       },
     };
   } catch (error) {
-    console.error("Error fetching car details in getServerSideProps:", error);
+    console.error('Error fetching car from DB in getServerSideProps:', error);
     return {
       props: {
-        car: null, // Return null or an empty object in case of error
+        car: null,
       },
     };
   }
 }
-
-// If you were using getStaticProps, you would also need getStaticPaths
-// export async function getStaticPaths() {
-//     // Fetch possible car IDs to pre-render
-//     // const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/cars`);
-//     // const data = await res.json();
-//     // const paths = data.cars.map(car => ({
-//     //     params: { carId: car._id.toString() }
-//     // }));
-//     return {
-//         paths: [], // Or the fetched paths
-//         fallback: 'blocking' // or true
-//     };
-// }

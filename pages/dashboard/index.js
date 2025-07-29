@@ -27,7 +27,18 @@ export default function Dashboard() {
     // Fetch user's bookings
     const fetchBookings = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/users/${loggedInUser._id}/bookings`);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+        
+        const res = await fetch(`/api/users/${loggedInUser._id}/bookings`, {
+          signal: controller.signal,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        
+        clearTimeout(timeoutId);
+        
         if (!res.ok) {
            if (res.status === 404) {
                 setBookings([]); // No bookings found for this user
@@ -37,11 +48,15 @@ export default function Dashboard() {
           throw new Error(`Failed to fetch bookings: ${res.status}`);
         }
         const data = await res.json();
-        setBookings(data.bookings);
+        setBookings(data.bookings || []);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching user bookings:", error);
-        setError('Failed to load bookings. Please try again.');
+        if (error.name === 'AbortError') {
+          setError('Request timed out. Please refresh the page.');
+        } else {
+          setError('Failed to load bookings. Please refresh the page.');
+        }
         setLoading(false);
       }
     };

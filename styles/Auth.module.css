@@ -3,9 +3,13 @@
 .container {
   min-height: 100vh;
   display: flex;
-  flex-direction: column; /* Arrange children in a column */
-  /* Beautiful background */
-  background: linear-gradient(to top right, #6a85b6 0%, #bac8e0 100%);
+  flex-direction: column;
+  background: linear-gradient(to top right, #6a85b6 0%, #bac8e0 100%) !important;
+}
+
+.container body {
+  background: linear-gradient(to top right, #6a85b6 0%, #bac8e0 100%) !important;
+  animation: none !important;
 }
 
 .main {

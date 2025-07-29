@@ -31,8 +31,7 @@ const Navigation = () => {
         router.push('/auth/login'); // Redirect to login page
     };
 
-    // Check if the current path is /cars
-    const isCarsPage = router.pathname === '/cars';
+
 
     return (
         <nav className={styles.navigation}>
@@ -59,19 +58,42 @@ const Navigation = () => {
                 </li>
                 {isLoggedIn ? (
                     <>
-                        {/* Removed Dashboard link */}
-                        {isCarsPage && ( // Conditionally render Logout only on the cars page
-                             <li>
-                                <button onClick={handleLogout} className={styles.logoutButton}>
-                                    Logout
-                                </button>
+                        {!isAdmin && (
+                            <li>
+                                <Link href="/dashboard">
+                                    Dashboard
+                                </Link>
                             </li>
                         )}
-                         {!isCarsPage && (
-                            <li>
-                                 {/* You can add other navigation items here that should appear when logged in but not on the cars page */}
-                            </li>
-                         )}
+                        {isAdmin && (
+                            <>
+                                <li>
+                                    <Link href="/admin/dashboard">
+                                        Admin Dashboard
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/admin/cars">
+                                        Manage Cars
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/admin/users">
+                                        Manage Users
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/admin/bookings">
+                                        Manage Bookings
+                                    </Link>
+                                </li>
+                            </>
+                        )}
+                        <li>
+                            <button onClick={handleLogout} className={styles.logoutButton}>
+                                Logout
+                            </button>
+                        </li>
                     </>
                 ) : (
                     <>

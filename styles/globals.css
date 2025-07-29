@@ -1,13 +1,74 @@
 /* styles/globals.css */
-body {
+html, body {
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color: #1a1a1a; /* Dark background */
-  color: #ffffff; /* Light text color */
+  background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe) !important;
+  background-size: 400% 400% !important;
+  animation: gradientShift 15s ease infinite !important;
+  color: #ffffff;
   line-height: 1.6;
   font-size: 18px;
+  min-height: 100vh;
+}
+
+/* Apply background to all containers except excluded pages */
+*:not([class*="Home"]):not([class*="Auth"]) {
+  background: inherit;
+}
+
+/* Override white backgrounds on all pages except home and auth */
+div:not([class*="Home"]):not([class*="Auth"]) {
+  background-color: transparent !important;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Content styling for better readability */
+.container, [class*="container"] {
+  position: relative;
+}
+
+/* Card-like styling for content areas */
+[class*="main"], [class*="formContainer"], [class*="carList"], [class*="bookingsList"] {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Text shadow for better readability */
+h1, h2, h3, h4, h5, h6 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Button styling enhancement */
+button, [class*="Button"] {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+button:hover, [class*="Button"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 a {

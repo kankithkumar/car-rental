@@ -1,8 +1,10 @@
 // components/BookingForm.js
 import { useState } from 'react';
-import styles from '../styles/BookingForm.module.css'; // We'll create this CSS module next
+import { useRouter } from 'next/router'; // Add this line
+import styles from '../styles/BookingForm.module.css';
 
 const BookingForm = ({ carId }) => {
+  const router = useRouter(); // Add this line
   const [bookPlace, setBookPlace] = useState('');
   const [bookDate, setBookDate] = useState('');
   const [duration, setDuration] = useState('');
@@ -10,6 +12,7 @@ const BookingForm = ({ carId }) => {
   const [returnDate, setReturnDate] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false); // Add this line
 
   // In a real application, you would get the logged-in user's ID
   // from your authentication context or state management
@@ -20,10 +23,11 @@ const BookingForm = ({ carId }) => {
     e.preventDefault();
     setError('');
     setSuccess('');
-    setSubmitting(true);
+    setIsSubmitting(true); // Use the new state variable
 
      if (!userId) {
         setError('Please login to book a car.');
+        setIsSubmitting(false); // Reset submitting state on error
         return;
     }
 
@@ -66,6 +70,8 @@ const BookingForm = ({ carId }) => {
     } catch (error) {
       console.error("Booking error:", error);
       setError('An unexpected error occurred during booking. Please try again later.');
+    } finally {
+      setIsSubmitting(false); // Reset submitting state after fetch
     }
   };
 
@@ -84,6 +90,7 @@ const BookingForm = ({ carId }) => {
             onChange={(e) => setBookPlace(e.target.value)}
             required
             className={styles.inputField}
+            disabled={isSubmitting} // Disable input while submitting
           />
         </div>
         <div className={styles.formGroup}>
@@ -95,6 +102,7 @@ const BookingForm = ({ carId }) => {
             onChange={(e) => setBookDate(e.target.value)}
             required
             className={styles.inputField}
+            disabled={isSubmitting} // Disable input while submitting
           />
         </div>
         <div className={styles.formGroup}>
@@ -107,6 +115,7 @@ const BookingForm = ({ carId }) => {
             required
             min="1"
             className={styles.inputField}
+            disabled={isSubmitting} // Disable input while submitting
           />
         </div>
          <div className={styles.formGroup}>
@@ -118,6 +127,7 @@ const BookingForm = ({ carId }) => {
             onChange={(e) => setDestination(e.target.value)}
             required
             className={styles.inputField}
+            disabled={isSubmitting} // Disable input while submitting
           />
         </div>
         <div className={styles.formGroup}>
@@ -129,9 +139,12 @@ const BookingForm = ({ carId }) => {
             onChange={(e) => setReturnDate(e.target.value)}
             required
             className={styles.inputField}
+            disabled={isSubmitting} // Disable input while submitting
           />
         </div>
-        <button type="submit" className={styles.submitButton}>Submit Booking Request</button>
+        <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
+          {isSubmitting ? 'Submitting...' : 'Submit Booking Request'} {/* Change button text while submitting */}
+        </button>
       </form>
     </div>
   );

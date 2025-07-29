@@ -5,6 +5,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .main {
@@ -15,24 +24,131 @@
   align-items: center;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 2rem;
+}
+
 .title {
   font-size: 3rem;
-  color: #00ccff; /* Bright color for the title */
-  margin-bottom: 3rem;
+  color: #00ccff;
+  margin: 0;
+}
+
+.dashboardSection {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.dashboardToggle {
+  background: #007acc;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.dashboardToggle:hover {
+  background: #005a99;
+}
+
+.dashboardLink {
+  color: #00ccff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.dashboardLink:hover {
+  text-decoration: underline;
+}
+
+.quickDashboard {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.quickDashboard h3 {
+  margin: 0 0 1rem 0;
+  color: #333;
+}
+
+.bookingsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bookingItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.status {
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status.approved {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status.rejected {
+  background: #f8d7da;
+  color: #721c24;
 }
 
 .carList {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-    gap: 2rem; /* Space between car cards */
-    padding: 0 2rem;
-    width: 100%; /* Ensure the grid takes full width */
-    max-width: 1200px; /* Optional: Limit max width for larger screens */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
 }
 
-/* Add responsiveness if needed */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
   .title {
     font-size: 2rem;
+  }
+  
+  .dashboardSection {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .bookingItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
   }
 }

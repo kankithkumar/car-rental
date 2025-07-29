@@ -1,18 +1,18 @@
 /* styles/Navigation.module.css */
 .navigation {
-  background-color: #fff; /* White background */
-  padding: 1rem 3rem; /* Increased padding */
+  background-color: #fff;
+  padding: 1rem 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #333; /* Dark text color */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .logo a {
-  font-size: 1.5rem; /* Slightly smaller logo */
+  font-size: 1.5rem;
   font-weight: bold;
-  color: #333; /* Dark color for the logo */
+  color: #333;
   text-decoration: none;
 }
 
@@ -25,36 +25,34 @@
 }
 
 .navList li {
-  margin-left: 2rem; /* Space between navigation items */
+  margin-left: 2rem;
 }
 
 .navList a {
-  color: #555; /* Slightly lighter dark color for links */
+  color: #555;
   text-decoration: none;
-  font-size: 1rem; /* Standard font size */
+  font-size: 1rem;
   transition: color 0.3s ease;
 }
 
 .navList a:hover {
-  color: #007bff; /* Blue highlight color on hover (example) */
+  color: #007bff;
 }
 
-.logoutButton, /* Apply similar styling to logout button */
-.navList button {
-    padding: 8px 20px; /* Padding for the button */
-    border: 1px solid #007bff; /* Blue border */
-    border-radius: 5px; /* Rounded corners */
-    background-color: #fff; /* White background */
-    color: #007bff; /* Blue text color */
+.logoutButton {
+    padding: 8px 20px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #007bff;
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.logoutButton:hover,
-.navList button:hover {
-    background-color: #007bff; /* Blue background on hover */
-    color: #fff; /* White text on hover */
+.logoutButton:hover {
+    background-color: #007bff;
+    color: #fff;
 }
 
 

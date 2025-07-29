@@ -7,47 +7,45 @@ import { ObjectId } from 'mongodb';
 export default async function handler(req, res) {
     // In a real app, verify the user's authentication and authorization here
 
-  if (req.method === 'POST') {
-    const { bookingId, amount } = req.body;
+    if (req.method === 'POST') {
+      const { bookingId, amount } = req.body;
 
-    if (!bookingId || amount === undefined) {
-      return res.status(400).json({ message: 'Missing booking ID or amount' });
-    }
-
-    try {
-      const client = await clientPromise;
-      const db = client.db('car_rental_db'); // Replace with your database name
-
-      // Find the booking
-      const booking = await db.collection('bookings').findOne({ _id: ObjectId(bookingId) });
-
-      if (!booking) {
-          return res.status(404).json({ message: 'Booking not found' });
+      if (!bookingId || amount === undefined) {
+        return res.status(400).json({ message: 'Missing booking ID or amount' });
       }
 
-      // Basic check if the amount matches the booking price (optional for simulation)
-      if (booking.price !== amount) {
-           console.warn(`Simulated payment amount mismatch for booking ${bookingId}. Expected: ${booking.price}, Received: ${amount}`);
-           // In a real scenario, this would likely be an error or require reconciliation.
-      }
+      try {
+        const client = await clientPromise;
+        const db = client.db('car_rental_db'); // Replace with your database name
 
+        // Find the booking
+        const booking = await db.collection('bookings').findOne({ _id: new ObjectId(bookingId) });
 
-      // Simulate successful payment and update booking status to 'approve'
-      const updateBookingResult = await db.collection('bookings').updateOne(
-          { _id: ObjectId(bookingId) },
-          { $set: { book_status: 'approve' } } // Update status to 'approve' after payment
-      );
+        if (!booking) {
+            return res.status(404).json({ message: 'Booking not found' });
+        }
 
-       // Create a payment record (simplified)
-       const newPayment = {
-            booking_id: ObjectId(bookingId),
-            payment_method: 'Simulated', // Indicate simulated payment
-            amount: amount,
-            payment_date: new Date(),
-            transaction_id: 'sim_' + Date.now(), // Simulated transaction ID
-       };
+        // In a real scenario, you would integrate with a payment gateway here.
+        // This is a simplified simulation.
 
-       await db.collection('payment').insertOne(newPayment);
+        // For simulation, we'll assume the payment is successful
+
+        // Update booking status to 'approved'
+        const updateBookingResult = await db.collection('bookings').updateOne(
+          { _id: new ObjectId(bookingId) }, // Use new ObjectId()
+          { $set: { book_status: 'approved' } }
+        );
+
+        // Create a payment record (simplified)
+        const newPayment = {
+             booking_id: new ObjectId(bookingId), // Use new ObjectId()
+             payment_method: 'Simulated', // Indicate simulated payment
+             amount: amount,
+             payment_date: new Date(),
+             transaction_id: 'sim_' + Date.now(), // Simulated transaction ID
+        };
+
+        await db.collection('payment').insertOne(newPayment);
 
 
       if (updateBookingResult.modifiedCount === 1) {
@@ -57,11 +55,11 @@ export default async function handler(req, res) {
            res.status(200).json({ message: 'Simulated payment processed, booking was already approved' });
       }
 
-    } catch (error) {
-      console.error("Simulated payment API error:", error);
-      res.status(500).json({ message: 'An unexpected error occurred during simulated payment.' });
+      } catch (error) {
+        console.error('Simulated payment API error:', error);
+        res.status(500).json({ message: 'Something went wrong' });
+      }
+    } else {
+      res.status(405).json({ message: 'Method Not Allowed' });
     }
-  } else {
-    res.status(405).json({ message: 'Method Not Allowed' });
   }
-}

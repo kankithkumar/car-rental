@@ -1,29 +1,31 @@
-// pages/api/cars/[id].js
-import clientPromise from '../../../utils/mongodb';
+import clientPromise from '../../../../utils/mongodb';
 import { ObjectId } from 'mongodb';
 
 export default async function handler(req, res) {
-  const { id } = req.query; // Get the car ID from the URL query parameters
+  if (req.method !== 'GET') {
+    return res.status(405).json({ message: 'Method Not Allowed' });
+  }
 
-  if (req.method === 'GET') {
-    try {
-      const client = await clientPromise;
-      const db = client.db('car_rental_db'); // Replace with your database name
+  try {
+    const client = await clientPromise;
+    const db = client.db('car_rental_db');
+    const { carId } = req.query;
 
-      // Find the car by its ID
-      const car = await db.collection('cars').findOne({ _id: ObjectId(id) });
-
-      if (!car) {
-        return res.status(404).json({ message: 'Car not found' });
-      }
-
-      res.status(200).json({ car });
-
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Something went wrong' });
+    if (!ObjectId.isValid(carId)) {
+      return res.status(400).json({ message: 'Invalid car ID' });
     }
-  } else {
-    res.status(405).json({ message: 'Method Not Allowed' });
+
+    const car = await db.collection('cars').findOne({ _id: new ObjectId(carId) });
+
+    if (!car) {
+      return res.status(404).json({ message: 'Car not found' });
+    }
+
+    car._id = car._id.toString();
+
+    res.status(200).json({ car });
+  } catch (error) {
+    console.error('API error fetching car:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 }

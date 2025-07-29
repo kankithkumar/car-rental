@@ -4,8 +4,12 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  /* Background color from the reference image */
   background-color: #f2f5f8;
+}
+
+.container body {
+  background: #f2f5f8 !important;
+  animation: none !important;
 }
 
 .main {

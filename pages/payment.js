@@ -38,7 +38,7 @@ export default function Payment() {
 
     try {
         // Call a backend API route to simulate payment success and update booking status
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/simulate-payment`, { // We'll create this API endpoint
+      const res = await fetch('/api/simulate-payment', { // Direct API call
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -54,13 +54,17 @@ export default function Payment() {
       const data = await res.json();
 
       if (res.ok) {
+        console.log("Payment simulation successful!"); // Log success
+        console.log("API response data:", data); // Log API response data
         setSuccess('Payment simulated and processed successfully!');
         // Optionally redirect to a success page or user dashboard after a delay
          setTimeout(() => {
-             router.push('/dashboard'); // Redirect to user dashboard
+             console.log("Attempting redirection to /dashboard"); // Log before redirect
+             window.location.href = '/dashboard'; // Use window.location for more reliable redirect
          }, 2000); // Redirect after 2 seconds
 
       } else {
+        console.log("Payment simulation failed. Response data:", data); // Log failure with data
         setError(data.message || 'Payment simulation failed.');
       }
     } catch (error) {
