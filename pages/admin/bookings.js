@@ -27,7 +27,7 @@ export default function AdminBookings() {
     // Fetch all bookings
     const fetchBookings = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/bookings`);
+        const res = await fetch('/api/admin/bookings');
         if (!res.ok) {
            if (res.status === 404) {
                 setBookings([]); // No bookings found
@@ -53,7 +53,7 @@ export default function AdminBookings() {
 
   const handleUpdateStatus = async (bookingId, newStatus) => {
        try {
-           const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admin/bookings/${bookingId}`, {
+           const res = await fetch(`/api/admin/bookings/${bookingId}`, {
                method: 'PUT',
                headers: {
                    'Content-Type': 'application/json',
@@ -124,8 +124,8 @@ export default function AdminBookings() {
               <thead>
                 <tr>
                   <th>Booking ID</th>
-                  <th>User ID</th> {/* You might want to display user email/name */}
-                  <th>Car ID</th> {/* You might want to display car make/model */}
+                  <th>User</th>
+                  <th>Car</th>
                   <th>Pickup Date</th>
                    <th>Return Date</th>
                    <th>Price</th>
@@ -137,8 +137,8 @@ export default function AdminBookings() {
                 {bookings.map((booking) => (
                   <tr key={booking._id}>
                     <td>{booking._id}</td>
-                    <td>{booking.user_id}</td>
-                    <td>{booking.car_id}</td>
+                    <td>{booking.user_name || 'Unknown User'}</td>
+                    <td>{booking.car_name || 'Unknown Car'}</td>
                     <td>{new Date(booking.book_date).toLocaleDateString()}</td>
                      <td>{new Date(booking.return_date).toLocaleDateString()}</td>
                      <td>${booking.price}</td>

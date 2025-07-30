@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       const db = client.db('car_rental_db'); // Replace with your database name
 
       // Verify if the user exists
-      const user = await db.collection('users').findOne({ _id: ObjectId(userId) });
+      const user = await db.collection('users').findOne({ _id: new ObjectId(userId) });
 
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 
       // Create the new feedback document
       const newFeedback = {
-        user_id: ObjectId(userId),
+        user_id: new ObjectId(userId),
         comment: comment,
         created_at: new Date(), // Add a timestamp
       };

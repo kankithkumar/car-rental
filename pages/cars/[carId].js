@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styles from '../../styles/CarDetails.module.css';
-import AppNavigation from '../../components/AppNavigation';
+import Navigation from '../../components/Navigation';
 import BookingForm from '../../components/BookingForm';
 import clientPromise from '../../utils/mongodb'; // MongoDB connection utility
 import { ObjectId } from 'mongodb';
@@ -17,7 +17,7 @@ export default function CarDetails({ car }) {
           <meta name="description" content="Car details not available" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <AppNavigation />
+        <Navigation />
         <main className={styles.main}>
           <p>Car not found.</p>
         </main>
@@ -33,7 +33,7 @@ export default function CarDetails({ car }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <AppNavigation />
+      <Navigation />
 
       <main className={styles.main}>
         <div className={styles.carDetailsContainer}>

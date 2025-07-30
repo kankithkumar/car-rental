@@ -1,136 +1,93 @@
 /* styles/Payment.module.css */
 .container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-}
-
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  min-height: 100vh;
+  background-color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .main {
-    flex: 1;
-    padding: 2rem;
-    width: 100%;
-    max-width: 800px; /* Adjust max width as needed for payment form */
-    margin: 2rem auto; /* Center the content */
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.paymentContainer {
-    background-color: #2a2a2a; /* Consistent dark background */
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    color: #ffffff; /* White text */
+.paymentFormContainer {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.formTitle {
-    font-size: 2rem;
-    color: #00ccff; /* Bright color for title */
-    margin-top: 0;
-    margin-bottom: 2rem;
-    text-align: center;
+.title {
+  font-size: 1.5rem;
+  color: #1f2937;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
 }
 
-.formGroup {
-    margin-bottom: 1.5rem;
-}
-
-.formGroup label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #cccccc; /* Lighter text for labels */
-    font-size: 1.1rem;
-}
-
-.inputField {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #555; /* Darker border */
-    border-radius: 4px;
-    background-color: #333; /* Dark input background */
-    color: #ffffff; /* White input text */
-    font-size: 1rem;
-}
-
-.inputField:focus {
-    outline: none;
-    border-color: #00ccff; /* Highlight color on focus */
-    box-shadow: 0 0 5px rgba(0, 204, 255, 0.5);
+.amount {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .submitButton {
-    display: block;
-    width: 100%;
-    padding: 1rem;
-    background-color: #ff4081; /* Bright color for button */
-    color: #ffffff; /* White button text */
-    border: none;
-    border-radius: 4px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #1f2937;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .submitButton:hover {
-    background-color: #e03874; /* Slightly darker hover color */
+  background-color: #111827;
 }
 
 .submitButton:disabled {
-    background-color: #555;
-    cursor: not-allowed;
+  background-color: #9ca3af;
+  cursor: not-allowed;
 }
 
 .error {
-    color: #ff4081; /* Red color for error messages */
-    margin-bottom: 1rem;
-    text-align: center;
+  color: #ef4444;
+  margin-bottom: 1rem;
+  text-align: center;
+  background: #fee2e2;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
 }
 
 .success {
-    color: #00ccff; /* Green color for success messages */
-    margin-bottom: 1rem;
-    text-align: center;
+  color: #065f46;
+  margin-bottom: 1rem;
+  text-align: center;
+  background: #d1fae5;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
 }
 
-.paymentDetails {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #555; /* Separator line */
-}
-
-.paymentDetails p {
-    margin-bottom: 0.8rem;
-    color: #cccccc; /* Lighter text for details */
-    font-size: 1.1rem;
-}
-
-.paymentDetails .totalAmount {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #ff4081; /* Bright color for total amount */
-    margin-top: 1rem;
-}
-
-/* Add responsiveness */
 @media (max-width: 768px) {
-    .main {
-        padding: 1rem;
-    }
+  .main {
+    padding: 1rem;
+  }
 
-    .paymentContainer {
-        padding: 1.5rem;
-    }
+  .paymentFormContainer {
+    padding: 1.5rem;
+  }
 
-    .formTitle {
-        font-size: 1.8rem;
-    }
+  .title {
+    font-size: 1.25rem;
+  }
 }

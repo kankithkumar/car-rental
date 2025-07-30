@@ -19,10 +19,55 @@ export default async function handler(req, res) {
       const client = await clientPromise;
       const db = client.db('car_rental_db');
       
-      const bookings = await db.collection('bookings')
-        .find({ user_id: new ObjectId(userId) })
-        .sort({ book_date: -1 }) // Sort by booking date, newest first
-        .toArray();
+      const bookings = await db.collection('bookings').aggregate([
+        {
+          $match: { user_id: new ObjectId(userId) }
+        },
+        {
+          $addFields: {
+            car_id_obj: { $toObjectId: '$car_id' }
+          }
+        },
+        {
+          $lookup: {
+            from: 'cars',
+            localField: 'car_id_obj',
+            foreignField: '_id',
+            as: 'car'
+          }
+        },
+        {
+          $unwind: { path: '$car', preserveNullAndEmptyArrays: true }
+        },
+        {
+          $project: {
+            _id: 1,
+            book_date: 1,
+            return_date: 1,
+            price: 1,
+            book_status: 1,
+            book_place: 1,
+            destination: 1,
+            duration: 1,
+            car_name: {
+              $cond: {
+                if: { $and: ['$car.make', '$car.model'] },
+                then: { $concat: ['$car.make', ' ', '$car.model'] },
+                else: {
+                  $cond: {
+                    if: { $and: ['$car.brand', '$car.model'] },
+                    then: { $concat: ['$car.brand', ' ', '$car.model'] },
+                    else: '$car.make'
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          $sort: { book_date: -1 }
+        }
+      ]).toArray();
       
       res.status(200).json({ bookings: bookings || [] });
     } catch (error) {

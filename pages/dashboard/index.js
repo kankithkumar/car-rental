@@ -108,7 +108,7 @@ export default function Dashboard() {
                 <li key={booking._id} className={styles.bookingItem}>
                   <div className={styles.bookingDetails}>
                     <p><strong>Booking ID:</strong> {booking._id}</p>
-                    <p><strong>Car ID:</strong> {booking.car_id}</p> {/* You might want to fetch car details here */}
+                    <p><strong>Car:</strong> {booking.car_name || 'Unknown Car'}</p>
                     <p><strong>Pickup Place:</strong> {booking.book_place}</p>
                     <p><strong>Pickup Date:</strong> {new Date(booking.book_date).toLocaleDateString()}</p>
                     <p><strong>Duration:</strong> {booking.duration} days</p>
