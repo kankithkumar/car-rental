@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Car Rental Management System
+
+The Car Rental Management System is designed to streamline the process of renting cars. It provides an intuitive interface for customers to browse available cars, make bookings, and process payments, while also offering robust administrative tools for managing the car fleet, bookings, and user accounts.
+
+## Features
+
+### Customer Features
+- **Car Browsing**: View all available cars with detailed specifications and pricing
+- **Car Details**: Detailed view of each car with images and specifications
+- **Booking System**: Easy-to-use booking form for selecting rental dates and options
+- **User Authentication**: Secure login and registration system
+- **User Dashboard**: View booking history and manage profile
+- **Payment Processing**: Secure payment gateway integration
+- **Feedback System**: Submit feedback about rental experiences
+
+### Admin Features
+- **Dashboard**: Overview of key metrics like total bookings, revenue, and popular cars
+- **Car Management**: Add, edit, and remove cars from the fleet
+- **Booking Management**: View and manage all bookings
+- **User Management**: Manage user accounts and permissions
+
+## Tech Stack
+
+- **Frontend**: React, Next.js
+- **Styling**: CSS Modules, TailwindCSS
+- **Backend**: Next.js API Routes
+- **Database**: MongoDB
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js
+- npm
+- MongoDB instance
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/kankithkumar/car-rental.git
+   cd car-rental
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Learn More
+3. Create a `.env.local` file in the root directory with the following variables:
+   ```
+   MONGODB_URI=your_mongodb_connection_string
+   NEXT_PUBLIC_API_URL=http://localhost:3001/api
+   JWT_SECRET=your_jwt_secret
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `components/`: Reusable React components
+- `pages/`: Next.js pages and API routes
+- `public/`: Static assets
+- `styles/`: CSS modules for styling
+- `utils/`: Utility functions and helpers
