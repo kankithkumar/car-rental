@@ -1,11 +1,5 @@
 # Car Rental Management System
 
-A comprehensive web application for managing car rentals, built with Next.js, React, and MongoDB.
-
-![Car Rental Management System](public/next.svg)
-
-## Overview
-
 The Car Rental Management System is designed to streamline the process of renting cars. It provides an intuitive interface for customers to browse available cars, make bookings, and process payments, while also offering robust administrative tools for managing the car fleet, bookings, and user accounts.
 
 ## Features
@@ -24,7 +18,6 @@ The Car Rental Management System is designed to streamline the process of rentin
 - **Car Management**: Add, edit, and remove cars from the fleet
 - **Booking Management**: View and manage all bookings
 - **User Management**: Manage user accounts and permissions
-- **Reporting**: Generate reports on bookings and revenue
 
 ## Tech Stack
 
@@ -37,9 +30,9 @@ The Car Rental Management System is designed to streamline the process of rentin
 
 ### Prerequisites
 
-- Node.js (version 18 or higher)
+- Node.js
 - npm
-- MongoDB instance (local or cloud)
+- MongoDB instance
 
 ### Installation
 
